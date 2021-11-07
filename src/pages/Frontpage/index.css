@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#backgroundimg{
+    width: 100%;
+    height: 100%;
+    background-image: url(./3.png);
+    background-size: cover;
+    position: absolute;
+}
+#totalwrp{
+    height: 40vh;
+    width: 30vw; 
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+    margin-top: 40vh;
+    margin-left: 60vw;
+}
+.linkwrp{
+    display: flex;
+    justify-content: center;
+    margin-top: 1vh;
+}
+.link{
+    text-decoration: none;
+    color: black;
+
+}
+.linkwrp .link:nth-child(1){
+    margin-right: 5vw;
+}

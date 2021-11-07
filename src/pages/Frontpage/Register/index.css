@@ -1,0 +1,23 @@
+#Registerwrp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.int1{
+    width: 15vw;
+    border: 1px solid rgb(201, 190, 190);
+    outline: none;
+    border-radius: 5px;
+    height: 4vh;
+}
+.Registerbtn{
+    width: 6vw;
+    height: 4vh;
+    background-color: #40A9FF;
+    color: white;
+    border: none;
+}
+.Registerbtn:hover{
+    background-color: #1890FF;
+}
