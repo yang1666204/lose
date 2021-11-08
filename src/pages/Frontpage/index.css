@@ -31,3 +31,7 @@
 .linkwrp .link:nth-child(1){
     margin-right: 5vw;
 }
+.alert{
+    width: 11vw;
+    margin: 2vh auto 0;
+}

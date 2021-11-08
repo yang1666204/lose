@@ -44,13 +44,17 @@ export default class Login extends Component {
             }
         }).then(
             response=>{
-                console.log(response)
+                if(response.data.code===1000){
+                    this.props.history.push('/List')
+
+                }else if(response.data.data===1003){
+                    
+                }
             },
             error=>{
                 console.log(error)
             }
         )
-        this.props.history.push('/List')
     }
     }
     render() {
