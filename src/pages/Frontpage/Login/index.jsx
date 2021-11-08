@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import axios from 'axios';
 import { Input } from 'antd';
 import 'antd/dist/antd.css';
+import { get,post } from '../../../utils/axios';
 import { UserOutlined,LockOutlined } from '@ant-design/icons'
 
 import './index.css'
@@ -32,24 +33,35 @@ export default class Login extends Component {
         }   
         this.setState({password:e.currentTarget.value})  
     }
-    pushLogin=()=>{
+    pushLogin=async()=>{
         const {student_number,password} = this.state
         if(student_number && password){
-        axios({
-            method:'post',
-            url:'/api/user/login',
-            data:{
-                student_number:Number(student_number),
-                password
+            try{
+                let res = await post('/api/user/login',{
+                    student_number:Number(student_number),
+                    password
+                })
+                console.log("res",res);
+            }catch(err){
+                console.error("err",err);
             }
-        }).then(
-            response=>{
-                console.log(response)
-            },
-            error=>{
-                console.log(error)
-            }
-        )
+            
+            
+        // axios({
+        //     method:'post',
+        //     url:'/api/user/login',
+        //     data:{
+        //         student_number:Number(student_number),
+        //         password
+        //     }
+        // }).then(
+        //     response=>{
+        //         console.log(response)
+        //     },
+        //     error=>{
+        //         console.log(error)
+        //     }
+        // )
         this.props.history.push('/List')
     }
     }
