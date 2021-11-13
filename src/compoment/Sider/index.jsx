@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 import 'antd/dist/antd.css';
+import {UserOutlined} from '@ant-design/icons'
 import './index.css';
 import { Menu } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined,PoweroffOutlined  } from '@ant-design/icons';
@@ -10,9 +11,8 @@ const { SubMenu } = Menu;
 // submenu keys of first level
 const rootSubmenuKeys = ['sub1', 'sub2', 'sub4'];
 
-const Sider = () => {
+const Sider = (props) => {
   const [openKeys, setOpenKeys] = React.useState(['sub1']);
-
   const onOpenChange = keys => {
     const latestOpenKey = keys.find(key => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
@@ -20,18 +20,20 @@ const Sider = () => {
     } else {
       setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
     }
+    
   };
+
 
   return (
     <div>
-      <div>
-         <div><img src="" alt="" /></div>
-          <div>
-              <div>姓名：we</div>
-              <div>学号：2018000000</div>
+      <div className="self_wrp">
+         <div className="head"><UserOutlined /></div>
+          <div className="self_msg">
+              <div>姓名：{props.username}</div>
+              <div>学号：{props.num}</div>
           </div>
         </div>
-    <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange} style={{ width: 256 }}>
+    <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange} style={{ width: 200 }}>
       <SubMenu key="sub1" icon={<MailOutlined />} title="失物招领">
         <Menu.Item key="1"><NavLink to="/List/Add">新增失物</NavLink></Menu.Item>
         <Menu.Item key="2"><NavLink to="/List/Record">失物记录</NavLink></Menu.Item>

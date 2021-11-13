@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import { Input } from 'antd';
 import 'antd/dist/antd.css';
+import PubSub from 'pubsub-js';
 import { UserOutlined,LockOutlined,UserAddOutlined } from '@ant-design/icons'
 import './index.css'
+import { post } from '../../../utils/axios';
 
 export default class Register extends Component {
     state={
@@ -24,11 +25,11 @@ export default class Register extends Component {
         this.setState({RegistrationId:e.currentTarget.value})
     }
     saveRegistrationpassword=(e)=>{
-        let Registrationpassword = /^[0-9]{10}$/
+        let regRegistrationpassword = /^.{8}/
         if(e.currentTarget.value===''){
             this.setState({isRegitrationpasswordhave:false})
         }else{
-            this.setState({isRegitrationpasswordhave:true,isRegitrationpassword:Registrationpassword.test(e.currentTarget.value)})
+            this.setState({isRegitrationpasswordhave:true,isRegitrationpassword:regRegistrationpassword.test(e.currentTarget.value)})
         }
         this.setState({Registrationpassword:e.currentTarget.value})
     }
@@ -47,26 +48,29 @@ export default class Register extends Component {
         }
         this.setState({RegistrationName:e.currentTarget.value})
     }
-    Registration=()=>{
-        const {RegistrationId,Registrationpassword,RegistrationName} = this.state
-        if(RegistrationId && Registrationpassword && RegistrationName && this.state.ident){
-        axios({
-            method:'post',
-            url:'/api/user/signup',
-            data:{
-                user_name:RegistrationId,
-                password:Registrationpassword,
-                student_number:Number(RegistrationId)
-            }
-        }).then(
-            response=>{
-                console.log(response)
-            },
-            error=>{
-                console.log(error)
-            }
-        )
+    Registration = async()=>{
+        const {RegistrationId,Registrationpassword,RegistrationName,isident,isnum,isRegitrationpassword} = this.state
+        if(RegistrationId && Registrationpassword && RegistrationName && isident && isnum && isRegitrationpassword){
+            try{
+                    let res = await post('http://1.14.74.79:9090/laf/signup',{
+                        student_number:Number(RegistrationId),
+                        password:Registrationpassword,
+                        user_name:RegistrationName
+                        })
+                        console.log(res)
+                   if(res.data.code===1000){
+                       this.props.history.push('/Frontpage/Login')
+                       PubSub.publish('data',{isexist:false,iserror:false,isbusy:false,issuccess:true,isexist_signup:false})
+                   }else if(res.data.code===1002){
+                        PubSub.publish('data',{isexist:false,iserror:false,isbusy:false,issuccess:false,isexist_signup:true})
+                   }
+                }catch(err){
+                    console.log("error",err)
+            }      
     }}
+    componentWillUnmount() {
+        this.setState = () => false
+    }
     render() {
         return (
             <div id="Registerwrp">

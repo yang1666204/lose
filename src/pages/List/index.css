@@ -1,0 +1,4 @@
+.contentwrp{
+    display: flex;
+    flex-direction: row;
+}

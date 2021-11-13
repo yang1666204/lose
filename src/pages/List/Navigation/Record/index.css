@@ -1,0 +1,24 @@
+.choosewrp{
+    display: flex;
+    flex-direction: row;
+    margin: 2vh 0;
+    margin-left: 3vw;
+}
+.showlink{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.ListLink{
+    flex: 1;
+}
+.PicLink{
+    flex: 1;
+}
+.Searchint{
+    flex: 3;
+}
+.AddLink{
+    flex: 2;
+    padding-left: 4vw;
+}

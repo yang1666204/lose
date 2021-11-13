@@ -12,20 +12,23 @@ import Exit from './Navigation/Exit'
 import './index.css'
 
 export default class List extends Component {
+    
     render() {
         return (
             <div>
                 <Header></Header>
+                <div className="contentwrp">
                 <Navigation></Navigation>
-                <Switch>
-                    <Route path='/List/About' component={About}></Route>
-                    <Route path='/List/MemberList' component={MemberList}></Route>
-                    <Route path='/List/Add' component={Add}></Route>
-                    <Route path='/List/Selfmsg' component={Selfmsg}></Route>
-                    <Route path='/List/Record' component={Record}></Route>
-                    <Route path='/List/Registration' component={Registration}></Route>
-                    <Route path='/List/Exit' component={Exit}></Route>
-                </Switch>
+                    <Switch>
+                        <Route path='/List/About' component={About}></Route>
+                        <Route path='/List/MemberList' component={MemberList}></Route>
+                        <Route path='/List/Add' component={Add}></Route>
+                        <Route path='/List/Selfmsg' component={Selfmsg}></Route>
+                        <Route path='/List/Record' component={Record}></Route>
+                        <Route path='/List/Registration' component={Registration}></Route>
+                        <Route path='/List/Exit' component={Exit}></Route>
+                    </Switch>
+                </div>
             </div>
         )
     }

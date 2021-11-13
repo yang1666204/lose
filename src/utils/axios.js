@@ -1,11 +1,18 @@
 import axios from "axios"
 
-
-export function get(url,params={}){
+axios.interceptors.request.use((config)=>{
+    const token=localStorage.getItem('atoken') || ''
+    config.headers={
+        "Content-Type":'application/json',
+        "Authorization":token
+    }
+    return config
+},(error)=>{
+    return Promise.reject(error)
+})
+export function get(url,params){
     return new Promise(function(resolve,reject){
-        axios.get(url,{
-            params
-        }).then((res)=>{
+        axios.get(url,params).then((res)=>{
             resolve(res)
         }).catch((err)=>{
             reject(err)
@@ -23,11 +30,9 @@ export function post(url,data){
     })
 }
 
-export function del(url,params={}){
+export function del(url,params){
     return new Promise(function(resolve,reject){
-        axios.delete(url,{
-            params
-        }).then((res)=>{
+        axios.delete(url,params).then((res)=>{
             resolve(res)
         }).catch((err)=>{
             reject(err)

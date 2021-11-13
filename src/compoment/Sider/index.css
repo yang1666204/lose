@@ -1,0 +1,12 @@
+.self_wrp{
+    display: flex;
+    flex-direction: row;
+}
+.head{
+    font-size: 40px;
+}
+.self_msg{
+    margin-left: 1vw;
+    margin-top: 2vh;
+    font-weight: 500;
+}

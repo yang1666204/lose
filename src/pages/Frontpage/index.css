@@ -15,7 +15,7 @@
     background-color: white;
     border: 1px solid white;
     border-radius: 10px;
-    margin-top: 40vh;
+    margin-top: 38vh;
     margin-left: 60vw;
 }
 .linkwrp{
@@ -33,5 +33,9 @@
 }
 .alert{
     width: 11vw;
-    margin: 2vh auto 0;
+    margin: 0.5vh auto 0;
+}
+.alert1{
+    width: 13vw;
+    margin: 0.5vh auto 0;
 }

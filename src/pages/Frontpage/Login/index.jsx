@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import axios from 'axios';
+import PubSub from 'pubsub-js'
 import { Input } from 'antd';
 import 'antd/dist/antd.css';
 import { UserOutlined,LockOutlined } from '@ant-design/icons'
-
 import './index.css'
+import { post } from '../../../utils/axios';
 
-export default class Login extends Component {
+export default class Login extends Component{
     state={
         isidhave:true,
         ispasswordhave:true,
@@ -24,7 +24,7 @@ export default class Login extends Component {
         this.setState({student_number:e.currentTarget.value})    
     }
     savePassword=(e)=>{
-        let regpassword = /^[*]{8}/
+        let regpassword = /^.{8}/
         if(e.currentTarget.value===''){
             this.setState({ispasswordhave:false})
         }else{
@@ -32,30 +32,32 @@ export default class Login extends Component {
         }   
         this.setState({password:e.currentTarget.value})  
     }
-    pushLogin=()=>{
+    pushLogin=async()=>{
         const {student_number,password} = this.state
         if(student_number && password){
-        axios({
-            method:'post',
-            url:'/api/user/login',
-            data:{
-                student_number:Number(student_number),
-                password
-            }
-        }).then(
-            response=>{
-                if(response.data.code===1000){
+            try{
+                let res = await post('http://1.14.74.79:9090/laf/login',{
+                    student_number:Number(student_number),
+                    password
+                    })
+                if(res.data.code===1000){
                     this.props.history.push('/List')
-
-                }else if(response.data.data===1003){
-                    
+                    localStorage.setItem('atoken','Bearer '+res.data.data.atoken)
+                    PubSub.publish('self_msg',{num:res.data.data.student_number,username:res.data.data.user_name})
+                }else if(res.data.code===1003){
+                    PubSub.publish('data',{isexist:true,iserror:false,isbusy:false,issuccess:false,isexist_signup:false})
+                }else if(res.data.code===1004){
+                    PubSub.publish('data',{iserror:true,isexist:false,isbusy:false,issuccess:false,isexist_signup:false})
+                }else if(res.data.code===1005){
+                    PubSub.publish('data',{isbusy:true,iserror:false,isexist:false,issuccess:false,isexist_signup:false})
                 }
-            },
-            error=>{
-                console.log(error)
-            }
-        )
+            }catch(err){
+                console.log("error",err)
+        }
     }
+}
+    componentWillUnmount() {
+        this.setState = () => false
     }
     render() {
         return (

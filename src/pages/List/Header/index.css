@@ -1,0 +1,11 @@
+#header_wrp{
+    display: flex; 
+    background-color: #001529;    
+}
+.header_title{
+    color: white;
+    font-size: 24px;
+    height: 10vh;
+    padding-left: 3vw; 
+    padding-top: 2vh; 
+}

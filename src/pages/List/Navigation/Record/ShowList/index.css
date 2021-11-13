@@ -1,0 +1,21 @@
+.tdwrp{
+    display: flex;
+}
+.tdwrp td{
+    display: flex;
+    flex: 2;
+    height: 8vh;
+    border: 1px solid #F0F2F5;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+}
+.tdwrp td:nth-child(1){
+    flex: 1;
+}
+.tdwrp td:last-child{
+    flex:3;
+}
+.tdwrp td:last-child div Button{
+    margin: 0 1vw;
+}
