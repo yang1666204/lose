@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Sider from '../../../compoment/Sider'
-import PubSub from 'pubsub-js'
 
 export default class Navigation extends Component {
     state={
@@ -8,9 +7,7 @@ export default class Navigation extends Component {
         username:''
     }
     componentDidMount(){
-        this.token = PubSub.subscribe('self_msg',(_,stateObj)=>{
-			this.setState(stateObj)
-		})
+        this.setState({})
     }
     render() {
         return (

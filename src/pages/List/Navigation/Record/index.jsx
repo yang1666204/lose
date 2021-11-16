@@ -1,15 +1,30 @@
 import React, { Component } from 'react'
 import { Input } from 'antd';
 import { NavLink,Switch,Route } from 'react-router-dom'
+import { post } from '../../../../utils/axios';
 import ShowList from './ShowList'
 import Showpic from './Showpic'
 import './index.css'
+import PubSub from 'pubsub-js';
 
 export default class Record extends Component {
     
     render() {
         const { Search } = Input;
-        const onSearch = value => console.log(value);
+        const onSearch = async(value) => {
+            try{
+                let res = await post('http://1.14.74.79:9090/laf/get',{
+                    student_number:isNaN(value) ? null : Number(value),
+                    name:isNaN(value) ? value : null
+                })
+                if(res.data.code===1000 || res.data.code===1007){
+                    PubSub.publish('res',{res:res.data.data,issearch:true})
+                }
+            }
+            catch(err){
+                console.log(err)
+            }
+        }
         return (
                 <div className="showlink">
                     <div className="choosewrp">

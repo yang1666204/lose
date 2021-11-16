@@ -19,3 +19,11 @@
 .tdwrp td:last-child div Button{
     margin: 0 1vw;
 }
+.tfooter{
+    display: flex;
+    justify-content: space-around;
+    margin: 2vh 0;
+}
+.note{
+    margin: 2vh 5vw 2vh 2vw;
+}

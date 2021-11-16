@@ -41,9 +41,9 @@ export default class Login extends Component{
                     password
                     })
                 if(res.data.code===1000){
-                    this.props.history.push('/List')
                     localStorage.setItem('atoken','Bearer '+res.data.data.atoken)
-                    PubSub.publish('self_msg',{num:res.data.data.student_number,username:res.data.data.user_name})
+                    localStorage.setItem('self_msg',JSON.stringify({num:res.data.data.student_number,username:res.data.data.user_name}))
+                    this.props.history.push('/List/Record/ShowList')
                 }else if(res.data.code===1003){
                     PubSub.publish('data',{isexist:true,iserror:false,isbusy:false,issuccess:false,isexist_signup:false})
                 }else if(res.data.code===1004){

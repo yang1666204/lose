@@ -1,0 +1,17 @@
+.AddWrp{
+    display: flex;
+    flex-direction: column;
+}
+.AddLinkwrp{
+    display: flex;
+    flex-direction: row;
+    margin: 2vh 0;
+    width: 30vw;
+}
+.SingleLink{
+    flex: 1;
+    padding-left: 5vw;
+}
+.MultipleLink{
+    flex: 1;
+}
