@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Switch,Route } from 'react-router-dom'
+import { Switch,Route,Redirect } from 'react-router-dom'
 import Frontpage from './pages/Frontpage'
 import List from './pages/List'
+// import Login from './pages/Frontpage/Login'
 import './App.css'
 
 export default class App extends Component {
@@ -9,9 +10,9 @@ export default class App extends Component {
         return (
             <div>
                 <Switch>
-                    <Route path='/' component={Frontpage} exact></Route>
                     <Route path="/List" component={List}></Route>
                     <Route path='/Frontpage' component={Frontpage}></Route>
+                    <Redirect path="/" to="/Frontpage/Login"></Redirect>
                 </Switch>
             </div>
         )

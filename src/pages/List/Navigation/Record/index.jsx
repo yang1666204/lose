@@ -31,7 +31,7 @@ export default class Record extends Component {
                         <NavLink className="ListLink" to="/List/Record/ShowList">列表显示</NavLink>
                         <NavLink className="PicLink " to="/List/Record/Showpic">图表显示</NavLink>
                         <Search className="Searchint" placeholder="输入学号或姓名快速查询" onSearch={onSearch} enterButton />
-                        <NavLink className="AddLink" to="/List/Add">新增失物</NavLink>
+                        <NavLink className="AddLink" to="/List/Add/Single">新增失物</NavLink>
                     </div>
                     <Switch>
                         <Route path="/List/Record/ShowList" component={ShowList}></Route>
